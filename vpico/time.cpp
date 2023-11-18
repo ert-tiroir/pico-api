@@ -1,6 +1,17 @@
 
 #include <vpico/time.h>
 
+#ifdef REALTIME
+#include <chrono>
+#include <thread>
+
+void __sleep_microseconds (uint64_t duration) {
+    std::this_thread::sleep_for(std::chrono::microseconds(duration));
+}
+#else
+void __sleep_microseconds (uint64_t duration) {}
+#endif
+
 /* This is the virtual time taken since the boot, it is assumed that
    every operation done on the micro controller takes no time */
 uint64_t us_since_boot = 0;
@@ -11,22 +22,32 @@ uint64_t us_since_boot = 0;
 
 /**
  * Sleep duration micro seconds, equivalent to adding the duration to the virtual
- * time.
+ * time, and if the vpico is used for realtime application sleep during the duration.
  */
-void sleep_us (uint64_t duration) { us_since_boot += duration; }
+void sleep_us (uint64_t duration) {
+    __sleep_microseconds(duration);
+    us_since_boot += duration;
+}
 
 /**
  * Sleep duration milliseconds, equivalent to adding the duration in micro seconds
  * to the virtual time since boot.
 */
-void sleep_ms (uint32_t duration) { sleep_us(((uint64_t) duration) * 1000u); }
+void sleep_ms (uint32_t duration) {
+    sleep_us(((uint64_t) duration) * 1000u);
+}
 
 /**
  * Wait for the time to reach a milestone, equivalent to setting the virtual time to the
- * target if it is less than or equal
+ * target if it is less than or equal, and if the vpico is used for realtime application,
+ * sleep through the time.
  */
 void sleep_until (uint64_t target) {
-    if (target < us_since_boot) us_since_boot = target;
+    if (target < us_since_boot) {
+        __sleep_microseconds(us_since_boot - target);
+
+        us_since_boot = target;
+    }
 }
 
 /**************************************************************************************/
