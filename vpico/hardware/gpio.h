@@ -29,6 +29,9 @@ const int NB_GPIOS = (int) 30;
 void gpio_init (uint gpio);
 void gpio_set_dir (uint gpio, bool out);
 
+bool __device_gpio_get (uint gpio);
+void __device_gpio_put (uint gpio, int value);
+
 bool gpio_get (uint gpio);
 void gpio_put (uint gpio, int value);
 

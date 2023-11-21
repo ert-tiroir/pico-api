@@ -1,6 +1,8 @@
 
 #include <vpico/time.h>
 
+#ifdef VIRTUAL
+
 #ifdef REALTIME
 #include <chrono>
 #include <thread>
@@ -67,3 +69,4 @@ uint32_t us_to_ms (uint64_t duration_us) {
 uint64_t get_absolute_time () {
     return us_since_boot;
 }
+#endif

@@ -6,6 +6,8 @@
 #include <vector>
 #include "vpico/stdlib.h"
 
+#include "vpico/device/gpiodevice.h"
+
 std::vector<int>  GPIO_STATE (NB_GPIOS, GPIO_NONE);
 std::vector<bool> GPIO_VALUE (NB_GPIOS, false);
 
@@ -31,6 +33,7 @@ bool gpio_get (uint gpio) {
 
     return GPIO_VALUE[gpio];
 }
+bool __device_gpio_get (uint gpio) { return GPIO_VALUE[gpio]; }
 void gpio_put (uint gpio, int value) {
     if (gpio >= NB_GPIOS || gpio < 0)    __danger( "The GPIO %d is out of bounds to set the value\n", gpio );
     if (GPIO_STATE[gpio] == GPIO_NONE)   __danger( "The GPIO %d is not initialized\n", gpio );
@@ -39,11 +42,11 @@ void gpio_put (uint gpio, int value) {
 
     GPIO_VALUE[gpio] = value != 0;
 
-    if (gpio == PICO_DEFAULT_LED_PIN) {
-        if (value != 0) {
-            __debug( "The LED is now on.\n" );
-        } else { __debug ( "The LED is now off\n" ); }
-    }
+    for (int id = 0; id < gpio_device_count(); id ++)
+        get_gpio_device(id)->onPin();
+}
+void __device_gpio_put (uint gpio, int value) {
+    GPIO_VALUE[gpio] = value != 0;
 }
 
 #endif
