@@ -1,4 +1,5 @@
 
+#include <vpico/stdlib.h>
 #include <testing/entry.h>
 #include <iostream>
 

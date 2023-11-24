@@ -18,6 +18,18 @@ void setup_default_uart () {
     return ;
 }
 
+std::string buffer;
+
 void reset_uart () {
     uart_on = false;
+    buffer  = "";
 }
+
+#ifdef TESTING
+void add_to_cout_buffer (std::string values) {
+    buffer += values;
+}
+std::string get_cout_buffer () {
+    return buffer;
+}
+#endif

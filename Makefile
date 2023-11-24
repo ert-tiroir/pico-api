@@ -13,3 +13,9 @@ build:
 run:
 	make -B build
 	./out
+test:
+	mkdir -p build
+	make -B clean
+	g++ -o build/out -DTESTING -DVIRTUAL -I. $(SOURCES)
+	cp build/out .
+	./out
