@@ -9,7 +9,7 @@ struct VP__UART_01 : public TestCase {
 public:
     void setup () override {}
     bool run   () override {
-        return !is_uart_on () == false;
+        return !is_uart_on ();
     }
 
     const char* getName     () override { return "VP__UART_01"; }

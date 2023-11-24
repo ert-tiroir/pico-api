@@ -49,7 +49,7 @@ void sleep_ms (uint32_t duration) {
  * sleep through the time.
  */
 void sleep_until (uint64_t target) {
-    if (target < us_since_boot) {
+    if (target > us_since_boot) {
         __sleep_microseconds(us_since_boot - target);
 
         us_since_boot = target;

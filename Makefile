@@ -8,7 +8,7 @@ clean:
 build:
 	mkdir -p build
 	make -B clean
-	g++ -o build/out -DVIRTUAL -DREALTIME -I. $(SOURCES)
+	g++ -o build/out -DVIRTUAL -I. $(SOURCES)
 	cp build/out .
 run:
 	make -B build
