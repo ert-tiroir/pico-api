@@ -1,5 +1,4 @@
-
-#include <vpico/const.h>
+#pragma once
 
 #ifndef VIRTUAL
 #include "pico/stdlib.h"
@@ -13,6 +12,8 @@ const auto __printf = printf;
 
 bool is_uart_on ();
 void setup_default_uart ();
+
+void reset_uart ();
 
 #define __show(...) { __printf(__VA_ARGS__); }
 

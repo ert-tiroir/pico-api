@@ -18,6 +18,10 @@ void __sleep_microseconds (uint64_t duration) {}
    every operation done on the micro controller takes no time */
 uint64_t us_since_boot = 0;
 
+void reset_time () {
+    us_since_boot = 0;
+}
+
 /**************************************************************************************/
 /*                                 TIME MODIFICATIONS                                 */
 /**************************************************************************************/

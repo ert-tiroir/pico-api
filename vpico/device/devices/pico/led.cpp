@@ -15,4 +15,8 @@ void PicoLED_Device::onPin () {
     else { __debug ( "The LED is now off\n" ); }
 }
 
+bool PicoLED_Device::getLEDState () {
+    return LED_State;
+}
+
 #endif

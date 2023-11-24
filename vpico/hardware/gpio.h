@@ -1,9 +1,6 @@
+#pragma once
 
-#include <vpico/const.h>
-
-#ifndef VIRTUAL
-#include "hardware/gpio.h"
-#else
+#ifdef VIRTUAL
 
 #include <cstdint>
 
@@ -35,4 +32,7 @@ void __device_gpio_put (uint gpio, int value);
 bool gpio_get (uint gpio);
 void gpio_put (uint gpio, int value);
 
+void reset_gpio ();
+#else
+#include "hardware/gpio.h"
 #endif

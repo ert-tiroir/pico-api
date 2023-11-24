@@ -17,3 +17,7 @@ void setup_default_uart () {
     
     return ;
 }
+
+void reset_uart () {
+    uart_on = false;
+}

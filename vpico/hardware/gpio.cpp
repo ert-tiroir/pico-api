@@ -49,4 +49,11 @@ void __device_gpio_put (uint gpio, int value) {
     GPIO_VALUE[gpio] = value != 0;
 }
 
+void reset_gpio () {
+    for (int i = 0; i < NB_GPIOS; i ++) {
+        GPIO_STATE[i] = GPIO_NONE;
+        GPIO_VALUE[i] = false;
+    }
+}
+
 #endif

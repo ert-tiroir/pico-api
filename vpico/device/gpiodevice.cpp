@@ -18,4 +18,8 @@ void register_device (GpioDevice* device) {
     devices.push_back(device);
 }
 
+void reset_gpio_devices () {
+    devices = { new PicoLED_Device() };
+}
+
 #endif

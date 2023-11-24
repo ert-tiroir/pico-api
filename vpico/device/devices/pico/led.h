@@ -1,3 +1,4 @@
+#pragma once
 
 #include <vpico/device/gpiodevice.h>
 
@@ -8,6 +9,7 @@ private:
     bool LED_State = false;
 public:
     void onPin () override;
+    bool getLEDState ();
 };
 
 #endif
