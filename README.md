@@ -2,6 +2,8 @@
 
 The goal of this project is to recreate a "virtual machine"-like simulation of the raspberry pi pico by replacing the entire pico stdlib by a virtual pico standard library. This happens at compilation when the VIRTUAL flag is passed to the compilator, otherwise, it just adds the entire stdlib of pico into vpico/stdlib.h.
 
+The developpement of the project has been stopped in favor of using a real raspberry pi, feel free to reuse the existing code or to contribute to it. The features that were added are testing, general purpose input output, validation of simple uart between the pico and a connected computer.
+
 # Example
 
 Blinking the LED :
